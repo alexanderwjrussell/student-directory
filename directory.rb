@@ -32,7 +32,15 @@ def print_footer(names)
   puts "Overall, we have #{names.count} great students"
 end
 
+def name_letter_sort(students)
+  letter = "D"
+  select_students = students.select{|student| student[:name][0] == letter}
+  puts select_students
+end
+
 students = input_students
 print_header
 print(students)
 print_footer(students)
+puts
+name_letter_sort(students)
