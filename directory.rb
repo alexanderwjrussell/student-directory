@@ -38,9 +38,17 @@ def name_letter_sort(students)
   puts select_students
 end
 
+def lengthy_name_sort(students)
+  length = 12
+  select_students = students.select{|student| student[:name].length < length}
+  puts select_students
+end
+
 students = input_students
 print_header
 print(students)
 print_footer(students)
 puts
 name_letter_sort(students)
+puts
+lengthy_name_sort(students)
