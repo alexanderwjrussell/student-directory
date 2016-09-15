@@ -18,20 +18,20 @@ students
 end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "--------------"
+  puts "The students of Villains Academy".center(40)
+  puts "--------------".center(40)
 end
 
 def print(students)
   count = 0
   until count == students.length
-    puts "#{count + 1}. #{students[count][:name]} (#{students[count][:cohort]} cohort)"
+    puts "#{count + 1}. #{students[count][:name]} (#{students[count][:cohort]} cohort)".center(40)
     count += 1
   end
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+  puts "Overall, we have #{names.count} great students".center(40)
 end
 
 def name_letter_sort(students)
@@ -50,7 +50,7 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
-puts "-------------"
+puts "-------------".center(40)
 name_letter_sort(students)
-puts "-------------"
+puts "-------------".center(40)
 lengthy_name_sort(students)
