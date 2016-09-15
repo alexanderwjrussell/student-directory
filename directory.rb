@@ -5,10 +5,10 @@ def input_students
   students= []
   # Get the first name
   name = gets.chomp
-  # WHile the name is not empty, repaet the code
+  # While the name is not empty, repaet the code
   while !name.empty? do
     # Add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: :november, hobbies: :TableTennis}
     puts "Now we have #{students.count} students"
     # Get another name from the user
     name = gets.chomp
