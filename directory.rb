@@ -2,16 +2,28 @@ def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   # Create and ampty array
-  students= []
-  # Get the first name
-  name = gets.chomp
-  # While the name is not empty, repaet the code
-  while !name.empty? do
-    # Add the student hash to the array
-    students << {name: name, cohort: :november, hobbies: :TableTennis}
-    puts "Now we have #{students.count} students"
-    # Get another name from the user
+    students= []
+  # Keep adding students until the break criteria is hit
+  loop do
+    #Loop through the questions
+    puts "Students name: "
     name = gets.chomp
+    puts "Which cohort: "
+    cohort = gets.chomp.downcase.to_sym
+      if cohort.empty?
+        cohort = "Unknown"
+      end
+    puts "Main hobby: "
+    hobby = gets.chomp.downcase.to_sym
+      if hobby.empty?
+        hobby = "None"
+      end
+    # Add the student information to the hashes in the array
+    students << {name: name, cohort: cohort, hobby: hobby}
+    puts "Now we have #{students.count} students"
+    puts ""
+    puts "Add another student (Y/N)"
+    break if gets.chomp.downcase == "n"
   end
 # Return the array of students
 students
