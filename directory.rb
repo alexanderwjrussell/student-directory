@@ -20,7 +20,11 @@ def input_students
       end
     # Add the student information to the hashes in the array
     students << {name: name, cohort: cohort, hobby: hobby}
-    puts "Now we have #{students.count} students"
+    if students.count == 1
+      puts "Now we have #{students.count} student"
+    else
+      puts "Now we have #{students.count} students"
+    end
     puts ""
     puts "Add another student (Y/N)"
     break if gets.chomp.downcase == "n"
