@@ -35,6 +35,39 @@ def input_students
 @students
 end
 
+def interactive_menu
+  @students = input_students
+  loop do
+    print_menu
+    process(gets.chomp)
+  end
+end
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
+end
+
+def show_students
+  print_header
+  print_students_list(@students)
+  print_footer(@students)
+end
+
+def process(selection)
+  case selection
+  when "1"
+    input_students
+  when "2"
+    show_students
+  when "9"
+    exit
+  else
+    puts "I don't know what you meant, try again"
+  end
+end
+
 def print_header
   puts "The students of Villains Academy".center(40)
   puts "--------------".center(40)
@@ -66,39 +99,6 @@ end
 
 def sort_cohort(students)
   @students.sort_by{|student| student[:cohort]}
-end
-
-def print_menu
-  puts "1. Input the students"
-  puts "2. Show the students"
-  puts "9. Exit"
-end
-
-def show_students
-  print_header
-  print_students_list(@students)
-  print_footer(@students)
-end
-
-def process(selection)
-  case selection
-  when "1"
-    input_students
-  when "2"
-    show_students
-  when "9"
-    exit
-  else
-    puts "I don't know what you meant, try again"
-  end
-end
-
-def interactive_menu
-  @students = input_students
-  loop do
-    print_menu
-    process(gets.chomp)
-  end
 end
 
 interactive_menu
