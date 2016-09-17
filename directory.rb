@@ -7,7 +7,7 @@ def input_students
   loop do
     #Loop through the questions
     puts "Students name: "
-    name = gets.chomp
+    name = gets.delete "\n"
       if name.empty?
          break
       end
