@@ -8,6 +8,9 @@ def input_students
     #Loop through the questions
     puts "Students name: "
     name = gets.chomp
+      if name.empty?
+         break
+      end
     puts "Which cohort: "
     cohort = gets.chomp.downcase.to_sym
       if cohort.empty?
@@ -40,10 +43,10 @@ end
 
 def print(students)
   count = 0
-  until count == students.length
-    puts "#{count + 1}. #{students[count][:name]} (#{students[count][:cohort]} cohort)".center(40)
-    count += 1
-  end
+    until count == students.length
+      puts "#{count + 1}. #{students[count][:name]} (#{students[count][:cohort]} cohort)".center(40)
+      count += 1
+    end
 end
 
 def print_footer(names)
@@ -62,6 +65,10 @@ def lengthy_name_sort(students)
   puts select_students
 end
 
+def sort_cohort(students)
+  students.sort_by{|student| student[:cohort]}
+end
+
 students = input_students
 print_header
 print(students)
@@ -70,3 +77,5 @@ puts "-------------".center(40)
 name_letter_sort(students)
 puts "-------------".center(40)
 lengthy_name_sort(students)
+puts "-------------".center(40)
+puts sort_cohort(students)
