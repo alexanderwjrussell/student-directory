@@ -5,17 +5,17 @@ def input_students
   loop do
     # Loop through the questions
     puts "Students name: "
-    name = gets.delete "\n"
+    name = STDIN.gets.delete "\n"
       if name.empty?
          break
       end
     puts "Which cohort: "
-    cohort = gets.chomp.downcase.to_sym
+    cohort = STDIN.gets.chomp.downcase.to_sym
       if cohort.empty?
         cohort = "Unknown"
       end
     puts "Main hobby: "
-    hobby = gets.chomp.downcase.to_sym
+    hobby = STDIN.gets.chomp.downcase.to_sym
       if hobby.empty?
         hobby = "None"
       end
@@ -28,7 +28,7 @@ def input_students
     end
     puts ""
     puts "Add another student (Y/N)"
-    break if gets.chomp.downcase == "n"
+    break if STDIN.gets.chomp.downcase == "n"
   end
 # Return the array of students
 @students
@@ -38,7 +38,7 @@ def interactive_menu
   @students = input_students
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
@@ -102,13 +102,25 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
       @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
+end
+
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "Sorry, #{filename} doesn't exist."
+    exit
+  end
 end
 
 def name_letter_sort(students)
@@ -127,4 +139,5 @@ def sort_cohort(students)
   @students.sort_by{|student| student[:cohort]}
 end
 
+try_load_students
 interactive_menu
