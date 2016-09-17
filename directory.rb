@@ -20,7 +20,7 @@ def input_students
         hobby = "None"
       end
     # Add the student information to the hashes in the array
-    @students << {name: name, cohort: cohort, hobby: hobby}
+    push_students(name, cohort)
     if @students.count == 1
       puts "Now we have #{@students.count} student"
     else
@@ -73,6 +73,10 @@ def process(selection)
   end
 end
 
+def push_students(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
+end
+
 def print_header
   puts "The students of Villains Academy".center(40)
   puts "--------------".center(40)
@@ -106,7 +110,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
-      @students << {name: name, cohort: cohort.to_sym}
+    push_students(name, cohort)
   end
   file.close
 end
