@@ -1,3 +1,5 @@
+require 'CSV'
+
 @students = []
 
 def input_students
@@ -81,22 +83,19 @@ end
 
 def save_students(filename = "students.csv")
   # Open the file for writing
-  File.open("students.csv", "w") do |file|
+  CSV.open("students.csv", "wb") do |csv|
     # Iterate over the array of studetns
     @students.each do |student|
-      student_data = [student[:name], student[:cohort]]
-      csv_line = student_data.join(",")
-      file.puts csv_line
+      csv << [student[:name], student[:cohort]]
     end
   end
 end
 
 def load_students(filename = "students.csv")
-  File.open(filename, "r") do |file|
-    file.readlines.each do |line|
-      name, cohort = line.chomp.split(',')
+  CSV.foreach(filename) do |line|
+      name = line[0]
+      cohort = line[1]
       push_students(name, cohort)
-    end
   end
 end
 
