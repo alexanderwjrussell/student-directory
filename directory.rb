@@ -4,31 +4,13 @@ def input_students
   puts "Please enter the names of the students"
   # Keep adding students until the break criteria is hit
   loop do
-    # Loop through the questions
-    puts "Students name: "
-    name = STDIN.gets.delete "\n"
-      if name.empty?
-         break
-      end
-    puts "Which cohort: "
-    cohort = STDIN.gets.chomp.downcase.to_sym
-      if cohort.empty?
-        cohort = "Unknown"
-      end
-    puts "Main hobby: "
-    hobby = STDIN.gets.chomp.downcase.to_sym
-      if hobby.empty?
-        hobby = "None"
-      end
+    # Loop through the question methods
+    input_students_name
+    input_students_cohort
+    input_students_hobby
     # Add the student information to the hashes in the array
-    push_students(name, cohort)
-    if @students.count == 1
-      puts "Now we have #{@students.count} student"
-    else
-      puts "Now we have #{@students.count} students"
-    end
-    puts ""
-    puts "Add another student (Y/N)"
+    push_students(@name, @cohort)
+    output_user_input
     break if STDIN.gets.chomp.downcase == "n"
   end
 # Return the array of students
@@ -80,7 +62,7 @@ end
 
 def print_header
   puts "The students of Villains Academy".center(40)
-  puts "--------------".center(40)
+  separation_line
 end
 
 def print_students_list(students)
@@ -92,7 +74,8 @@ def print_students_list(students)
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students".center(40)
+  separation_line
+  puts "Overall, we have #{@students.count} great #{@students.count > 1 ? "students" : "student"}".center(40)
 end
 
 def save_students
@@ -143,6 +126,37 @@ end
 
 def sort_cohort(students)
   @students.sort_by{|student| student[:cohort]}
+end
+
+def separation_line
+  puts "--------------".center(40)
+end
+
+def input_students_name
+  puts "Students name: "
+  @name = STDIN.gets.delete "\n"
+end
+
+def input_students_cohort
+  puts "Which cohort: "
+  @cohort = STDIN.gets.chomp.downcase.to_sym
+    if @cohort.empty?
+      @cohort = "Unknown"
+    end
+end
+
+def input_students_hobby
+  puts "Main hobby: "
+  @hobby = STDIN.gets.chomp.downcase.to_sym
+    if @hobby.empty?
+      @hobby = "None"
+    end
+end
+
+def output_user_input
+  puts "You have now added #{@students.count} #{@students.count > 1 ? "students" : "student"}"
+  puts ""
+  puts "Add another student (Y/N)"
 end
 
 try_load_students
