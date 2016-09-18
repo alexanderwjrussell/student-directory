@@ -45,8 +45,8 @@ def process(selection)
   case selection
   when "1" then input_students
   when "2" then show_students
-  when "3" then save_students
-  when "4" then load_students
+  when "3" then input_filename(selection)
+  when "4" then input_filename(selection)
   when "9" then exit
   else
     puts "I don't know what you meant, try again"
@@ -79,7 +79,7 @@ def print_footer(names)
   puts "Overall, we have #{@students.count} great #{@students.count > 1 ? "students" : "student"}".center(40)
 end
 
-def save_students
+def save_students(filename = "students.csv")
   # Open the file for writing
   file = File.open("students.csv", "w")
   # Iterate over the array of studetns
@@ -158,6 +158,12 @@ def output_user_input
   puts "You have now added #{@students.count} #{@students.count > 1 ? "students" : "student"}"
   puts ""
   puts "Add another student (Y/N)"
+end
+
+def input_filename(selection)
+  puts "Please enter a filename: "
+  filename = STDIN.gets.chomp
+  selection == "3" ? save_students(filename) : load_students(filename)
 end
 
 try_load_students
